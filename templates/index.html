@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        h1 {
+            text-align: center;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        .footerAlign {
+            text-decoration: none;
+            width: 266px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        pre {
+            text-align: center;
+        }
+
+        .ascii-art {
+            font-family: monospace;
+            white-space: pre;
+            text-align: center;
+            font-size: 1vw;
+        }
+
+        button {
+            margin:0 auto;
+            display:block;
+            background-color: blue; /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="ascii-art">
+######                                              ######                
+#     #   ##   #####  #   # #       ####  #    #    #     # ###### ###### 
+#     #  #  #  #    #  # #  #      #    # ##   #    #     # #      #      
+######  #    # #####    #   #      #    # # #  #    ######  #####  #####  
+#     # ###### #    #   #   #      #    # #  # #    #     # #      #      
+#     # #    # #    #   #   #      #    # #   ##    #     # #      #      
+######  #    # #####    #   ######  ####  #    #    ######  ###### ###### 
+                                                                            
+#     #                                                 #####                                                         
+#     # ######   ##   #####  #      # #    # ######    #     # ###### #    # ###### #####    ##   #####  ####  #####  
+#     # #       #  #  #    # #      # ##   # #         #       #      ##   # #      #    #  #  #    #   #    # #    # 
+####### #####  #    # #    # #      # # #  # #####     #  #### #####  # #  # #####  #    # #    #   #   #    # #    # 
+#     # #      ###### #    # #      # #  # # #         #     # #      #  # # #      #####  ######   #   #    # #####  
+#     # #      #    # #    # #      # #   ## #         #     # #      #   ## #      #   #  #    #   #   #    # #   #  
+#     # ###### #    # #####  ###### # #    # ######     #####  ###### #    # ###### #    # #    #   #    ####  #    #   
+
+<br>                                              
+    </div>
+
+    <p>
+        This uses an AI algorithm called gpt2 to generate fake headlines in the style of the Babylon Bee.  <br> <br>
+        All data for generation was sourced from thousands of Babylon Bee article titles. The algorithm itself <br>
+        is, essentially, taking these existing article titles from that dataset to create new and varied ones in very silly ways.<br> <br>
+        Disclaimer: Generated titles may contain content that could be viewed as insensitive.  Don't blame me or The Bee, blame Skynet...
+    </p>
+
+    <br>
+    <br>
+    
+    <div id="titleField">
+        <h3><b>...</b></h3>
+    </div>
+
+    <div class=".buttonAlign">
+        <button onclick="generateTitle()">Generate</button>
+    </div>
+
+    <br>
+    <br>
+
+    <div class=".footerAlign">
+        <footer>
+            <p>Babylon Bee is owned and operated by The Babylon Bee.  I am in no way affiliated with them but you should definitely check out their site!  They are awesome...</p>
+            <p><a href="https://github.com/EvanMPutnam" class="fa fa-github"> Follow on Github</a></p>
+        </footer>
+    </div>
+
+    <script defer>
+        function generateTitle() {
+            jQuery.ajax({
+                type: "GET",
+                url: "/title",
+                contentType: "application/json",
+                success: function(result) {
+                    document.getElementById("titleField").innerHTML = "<h3><b>" + result.title + "</b></h3>"
+                    console.log(result)
+                },
+                error: function(jqXHR, exception){
+                    console.log(jqXHR)
+                    console.log(exception)
+                }
+            })
+        }
+    </script>
+</body>
+</html>
