@@ -2,10 +2,11 @@ import os
 from flask import Flask, flash, request, render_template, jsonify
 import random
 
+RESULTS_FILE = "gpt2_results.txt"
 
 titles = []
 file_dir = os.path.dirname(os.path.abspath(__file__))
-with open(file_dir + "/data/results.txt") as fle:
+with open(file_dir + "/data/" + RESULTS_FILE, encoding = 'utf-8') as fle:
     for line in fle:
         titles.append(line)
 total_items = len(titles)
